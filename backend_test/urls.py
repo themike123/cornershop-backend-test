@@ -20,6 +20,6 @@ from .utils.healthz import healthz
 
 urlpatterns = [
     path("healthz", healthz, name="healthz"),
-    path( '', include('employees_menu.urls') ),    
+    path( '', include('employees_menu.urls') ),
     path('admin/', admin.site.urls),
 ]

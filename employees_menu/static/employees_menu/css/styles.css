@@ -1,0 +1,27 @@
+:root {
+    --main-color: #f03636;
+    --second-color: #e4e4e0;
+    --color-black: #1b1c19;
+  }
+
+@font-face {
+    font-family: <un-nombre-de-fuente-remota>;
+    src: <origen> [,<origen>]*;
+    [font-weight: <peso>];
+    [font-style: <estilo>];
+}
+
+
+@font-face {
+    font-family: "Avenir Next";
+    src: url(../font/AvenirNextLTPro-Regular.otf);
+}
+
+
+
+.tittle-cornershop{
+    font-size: 2.2rem;
+    color: var(--main-color);
+    font-weight: bold;
+    font-family: "Avenir Next";    
+}

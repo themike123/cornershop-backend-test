@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>{% block title %}Menu{% endblock %}</title>    
+
+    <link rel="stylesheet" href="{% static 'employees_menu/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'employees_menu/css/styles.css' %}">
+
+</head>
+<body>
+    
+    <div>
+        {% block content %}{% endblock %}
+    </div>
+    
+    <script src="{% static 'employees_menu/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

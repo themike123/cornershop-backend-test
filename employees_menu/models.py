@@ -32,5 +32,3 @@ class Order(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     note = models.TextField(blank=True)
     date = models.DateTimeField(editable=False, auto_now_add=True)
-
-#{{ form.employee.as_hidden }}

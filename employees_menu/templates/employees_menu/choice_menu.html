@@ -7,13 +7,51 @@
             <div class="col-md-12">
                 <div class="text-center">
                     <img src="{% static 'employees_menu/images/title.png' %}" alt="LOGO" class="img-fluid">
-                </div>
+                </div>                
 
-                <div>
-                    <p class="tittle-cornershop">LUNCH MENU</p>
-                </div>
+                {% if not menus %}
+                  <div class="alert alert-info text-center mt-5" role="alert">
+                    Menu not available, please check back later
+                  </div>
+                {% else %}
+                  <div>
+                    <p class="tittle-cornershop">LUNCH MENU</p>         
+                  </div>
+                  {% for menu in menus %}
+                    <div class="card mb-3">
+                      <div class="row g-0">
+                        <div class="col-md-4">
+                          <img src="{% static 'employees_menu/images/corn-pie.jpeg' %}" class="img-fluid rounded-start" alt="MENU">
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <h5 class="card-title">{{ menu.name }}</h5>
+                            <p class="card-text">{{ menu.description }}</p>
+                              
+                              <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="menu" value="{{ menu.id }}">                                
+                                {{ form.employee.as_hidden }}
+                                <div class="mb-2">
+                                  <label for="exampleFormControlTextarea1" class="form-label"><strong>order comments</strong></label>
+                                  <textarea class="form-control" name="note" id="exampleFormControlTextarea1" rows="1"></textarea>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-dark">Order Now</button>
+                              </form>
+                                                                                          
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                {% endif %}
+
+                
                 
 
+                <!--This is will delete-->
                 <div class="card mb-3">
                     <div class="row g-0">
                       <div class="col-md-4">
@@ -95,6 +133,9 @@
                       </div>
                     </div>
                   </div>
+                  <!--This is will delete-->
+
+
 
             </div>
         </div>

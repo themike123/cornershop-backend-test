@@ -10,10 +10,10 @@ class Menu(models.Model):
     name = models.CharField(max_length=50)
     image = models.ImageField(upload_to='uploads/lunch')
     date = models.DateField()
-    description = models.TextField()
+    description = models.TextField(blank=True)
 
 class Order(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
-    note = models.TextField()
+    note = models.TextField(blank=True)
     date = models.DateTimeField(editable=False, auto_now_add=True)

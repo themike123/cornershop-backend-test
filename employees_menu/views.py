@@ -1,36 +1,95 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
-from .models import Menu, Order, Employee
-from datetime import date
-from .forms import OrderForm
+from datetime import date, datetime
+from .models import  Order, Employee, Lunch, Menu
+from .forms import OrderForm, MenuForm, LuchForm
+from .tasks import send_reminder
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
 
-def menu(request, employee=None):
+def today_menu(request, menu=None):
+	context = {}
+
+	try:
+		context['menu'] = Menu.objects.get(uuid=menu).lunchs.all()		
+	
+		return render(request, 'employees_menu/today_menu.html', context)
+
+	except Menu.DoesNotExist:
+		return HttpResponse("Menu matching query does not exist")
+
+
+def new_order(request, lunch=None):
+	
+	context = {}
+
 	if request.method == 'POST':
-		print(request.POST)
 		form = OrderForm(request.POST)
+		
 		if form.is_valid():
-			form.save()			
-			#return redirect()
-		else:
-			print("Error al guardar")
-			print(form.errors)
+			now = datetime.now()
+			closed = datetime.now().replace(hour=11, minute=0, second=0, microsecond=0)
+			
+			if now < closed:
+				form.save()
+				context['success'] = "Good, your order has been registered"
+			else:
+				context['message'] = "It is out of business hours"
 	else:
-		pass		
-
-	form = OrderForm(initial={'employee': employee })
-	data = {'menus': Menu.objects.filter(date=date.today()),
-			'form': form}
-
-	return render(request, 'employees_menu/choice_menu.html', data)
+		form = OrderForm(initial={'lunch': lunch })
+	
+	context['form'] = form
+	return render(request, 'employees_menu/create_lunch.html', context)
 
 
-def panel(request):
-	return render(request, 'employees_menu/panel.html')
-
-def list_menus(request):
-	return render(request, 'employees_menu/list_menus.html')
-
-def list_orders(request):
-	return render(request, 'employees_menu/list_orders.html')
+def dashboard(request):
+	pass
 
 
+def menu_index(request):
+	
+	context = {}
+
+	if request.method == 'POST':
+
+		form = MenuForm(request.POST)
+
+		if form.is_valid():
+			new_menu = form.save()			
+			#send_reminder(request.build_absolute_uri('/menu/') + str(new_menu.uuid) + "/")
+	else:
+		form = MenuForm()
+
+	context['menus'] = Menu.objects.all()
+	context['form'] = form
+
+	return render(request, 'employees_menu/menus/index.html', context)
+
+
+def menu_new(request):	
+	pass
+
+def menu_edit(request, menu=None):
+	pass
+
+def lunch_index(request):
+	context = {}
+
+	if request.method == 'POST':
+
+		form = LuchForm(request.POST, request.FILES)
+
+		if form.is_valid():			
+			form.save()
+		else:			
+			print("Error al guardar")
+			print(form.errors)			
+	else:
+		form = LuchForm()
+
+	context['lunchs'] = Lunch.objects.all()
+	context['form'] = form
+
+	return render(request, 'employees_menu/lunchs/index.html', context)
+
+
+def lunch_new(request):
+	pass

@@ -1,9 +1,16 @@
 import uuid
-from django.db import models
+from django.db import models 
 
 class Employee(models.Model):
     name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=100, blank=True) 
+
+    class Meta:
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
+
 
 class Lunch(models.Model):
     name = models.CharField(max_length=50)
@@ -16,16 +23,21 @@ class Lunch(models.Model):
     def __str__(self):
         return self.name
 
-class Menu(models.Model):
-    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+class Menu(models.Model):    
+    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, 
+                            editable=False)
     lunchs = models.ManyToManyField(Lunch)
     date = models.DateField()
 
-    class Meta:
-        ordering = ['date']
+    @property
+    def get_str_luchs(self):
+        str_lunchs = ""
 
-    def __str__(self):
-        return self.date
+        for lunch in self.lunchs:
+            str_lunchs = str_lunchs + f"{lunch.name},"
+        
+        return str_lunchs
 
 class Order(models.Model):
     lunch = models.ForeignKey(Lunch, on_delete=models.CASCADE)

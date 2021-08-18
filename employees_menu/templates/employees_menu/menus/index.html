@@ -1,0 +1,38 @@
+{% extends "employees_menu/layout/base_panel.html" %}
+{% load static %}
+
+{% block content %}
+<div class="alert alert-warning mt-3" role="alert">
+  When a menu is saved, a notification will be sent to the employees by <strong>Slack</strong>
+</div>
+
+<h2>Crear Menu</h2>
+<form method="POST" class="mb-5">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+<h2>Menus</h2>
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>        
+        <th scope="col">Lunchs</th>
+        <th scope="col">Date</th>
+        <th scope="col">Actions</th>  
+      </tr>
+    </thead>
+    <tbody>        
+        {% for menu in menus %}    
+            <tr>
+                <td>{{ menu.lunchs }}</td>
+                <td>{{ menu.date }}</td>
+                <td><a href="" class="btn btn-info btn-sm">Edit</a> </td>
+            </tr>              
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

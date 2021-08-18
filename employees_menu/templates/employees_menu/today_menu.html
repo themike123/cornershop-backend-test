@@ -4,43 +4,29 @@
 {% block content %}
     <div class="container">
         <div class="row">            
-            <div class="col-md-12">
-                <div class="text-center">
+            <div class="col-md-12 mt-5">
+
+                <div class="text-center mb-5">
                     <img src="{% static 'employees_menu/images/title.png' %}" alt="LOGO" class="img-fluid">
                 </div>                
 
-                {% if not menus %}
+                {% if not menu %}
                   <div class="alert alert-info text-center mt-5" role="alert">
                     Menu not available, please check back later
                   </div>
-                {% else %}
-                  <div>
-                    <p class="tittle-cornershop">LUNCH MENU</p>         
-                  </div>
-                  {% for menu in menus %}
+                {% else %}                
+
+                  {% for lunch in menu %}
                     <div class="card mb-3">
                       <div class="row g-0">
                         <div class="col-md-4">
-                          <img src="{% static 'employees_menu/images/corn-pie.jpeg' %}" class="img-fluid rounded-start" alt="MENU">
+                          <img src="{% lunch.photo.url %}" class="img-fluid rounded-start" alt="MENU">
                         </div>
                         <div class="col-md-8">
                           <div class="card-body">
-                            <h5 class="card-title">{{ menu.name }}</h5>
-                            <p class="card-text">{{ menu.description }}</p>
-                              
-                              <form method="post">
-                                {% csrf_token %}
-                                <input type="hidden" name="menu" value="{{ menu.id }}">                                
-                                {{ form.employee.as_hidden }}
-                                <div class="mb-2">
-                                  <label for="exampleFormControlTextarea1" class="form-label"><strong>order comments</strong></label>
-                                  <textarea class="form-control" name="note" id="exampleFormControlTextarea1" rows="1"></textarea>
-                                </div>
-                                
-                                <button type="submit" class="btn btn-dark">Order Now</button>
-                              </form>
-                                                                                          
-
+                            <h5 class="card-title">{{ lunch.name }}</h5>
+                            <p class="card-text">{{ lunch.description }}</p>
+                            <a href="{%url 'menus:new_order' lunch.id  %}" class="btn btn-dark">Order Now</a>
                           </div>
                         </div>
                       </div>
@@ -60,15 +46,9 @@
                       <div class="col-md-8">
                         <div class="card-body">
                           <h5 class="card-title">Corn pie, Salad and Dessert</h5>
-                          <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                                      
-                            <div class="mb-2">
-                                <label for="exampleFormControlTextarea1" class="form-label"><strong>order comments</strong></label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
-                            </div>
-                                             
-                            <button type="button" class="btn btn-dark">Order Now</button>
-
+                          <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>                          
+                          <a href="" class="btn btn-dark">Order Now</a>
+                          <a href="#" class="btn btn-dark">Order Now</a>
                         </div>
                       </div>
                     </div>

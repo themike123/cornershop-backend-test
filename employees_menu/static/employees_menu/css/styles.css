@@ -2,7 +2,13 @@
     --main-color: #f03636;
     --second-color: #e4e4e0;
     --color-black: #1b1c19;
-  }
+}
+
+.erros-form-field{
+    color: red;
+    font-weight: bold;
+    font-size: .7rem;
+}
 
 @font-face {
     font-family: <un-nombre-de-fuente-remota>;

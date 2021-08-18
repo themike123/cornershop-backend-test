@@ -3,7 +3,10 @@
 ### Running the development environment
 
 * `make up`
+* `python manage.py migrate `
+* `coverage run --source='.' manage.py test employees_menu`
 * `dev up`
+
 
 ##### Rebuilding the base Docker image
 

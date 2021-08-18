@@ -7,6 +7,6 @@ SLACK_WEBHOOK = 'https://hooks.slack.com/services/T02BX2B1ATA/B02ASMZSTQF/oNfXDg
 
 @shared_task
 def send_reminder(message):
-    payload = '{"text":"%s"}' % message
+    payload = '{"text":"Hello! I share with you today\'s menu :) \n click here %s"}' % message
     response = requests.post(SLACK_WEBHOOK, data=payload) 
     print(response.text)

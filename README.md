@@ -8,8 +8,8 @@
 
 ##### Run Testing
 
-* `python manage.py migrate `
 * `coverage run --source='.' manage.py test employees_menu`
+* `coverage report`
 
 ##### Rebuilding the base Docker image
 

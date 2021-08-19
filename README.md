@@ -4,9 +4,12 @@
 
 * `make up`
 * `python manage.py migrate `
-* `coverage run --source='.' manage.py test employees_menu`
 * `dev up`
 
+##### Run Testing
+
+* `python manage.py migrate `
+* `coverage run --source='.' manage.py test employees_menu`
 
 ##### Rebuilding the base Docker image
 

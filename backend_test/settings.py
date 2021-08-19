@@ -150,7 +150,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = '/media/'
 
 STATIC_URL = "/static/"
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/menu/dashboard/'
+LOGOUT_REDIRECT_URL = '/login/'
 
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"],

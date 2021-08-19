@@ -41,7 +41,7 @@ def new_order(request, lunch=None):
 
 
 def dashboard(request):
-	pass
+	return render(request, 'employees_menu/dashboard.html')
 
 
 def menu_index(request):
@@ -63,9 +63,6 @@ def menu_index(request):
 
 	return render(request, 'employees_menu/menus/index.html', context)
 
-
-def menu_new(request):	
-	pass
 
 def menu_edit(request, menu=None):
 	pass
@@ -89,7 +86,3 @@ def lunch_index(request):
 	context['form'] = form
 
 	return render(request, 'employees_menu/lunchs/index.html', context)
-
-
-def lunch_new(request):
-	pass

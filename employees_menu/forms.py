@@ -1,8 +1,6 @@
 from django import forms
 from .models import Lunch, Order, Employee, Menu
-from django.forms import ModelForm, Select, Textarea, DateField, DateInput
-
-#from employees_menu.validators import validate_create_order_before_to_11am
+from django.forms import ModelForm, Select, Textarea, DateField, DateInput, ModelMultipleChoiceField
 
 class LuchForm(ModelForm):
     class Meta:
@@ -41,16 +39,16 @@ class EmployeeForm(ModelForm):
         model = Employee
         fields = ['name', 'last_name']
 
+
 class MenuForm(ModelForm):
 
-    #date = forms.DateField(initial=date.today(), validators=[validate_create_order_before_to_11am])    
+    lunchs = forms.ModelMultipleChoiceField(queryset=Lunch.objects.all(), widget=forms.CheckboxSelectMultiple)
 
     class Meta:
         model = Menu
         fields = ['lunchs', 'date']
-        widgets = {            
+        widgets = {
             'date': DateInput(attrs={
-                'type': 'date',
-                'style': "form-control",
-                }),
+                'type': 'date',                
+                })
         }

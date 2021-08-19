@@ -3,8 +3,12 @@
 ### Running the development environment
 
 * `make up`
-* `python manage.py migrate `
+* `python manage.py migrate`
 * `dev up`
+
+### Creating an admin user
+
+* `python manage.py createsuperuser`
 
 ##### Run Testing
 

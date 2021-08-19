@@ -24,20 +24,14 @@ class Lunch(models.Model):
         return self.name
 
 
-class Menu(models.Model):    
+class Menu(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, 
                             editable=False)
     lunchs = models.ManyToManyField(Lunch)
     date = models.DateField()
 
-    @property
-    def get_str_luchs(self):
-        str_lunchs = ""
-
-        for lunch in self.lunchs:
-            str_lunchs = str_lunchs + f"{lunch.name},"
-        
-        return str_lunchs
+    #def __str__(self):
+    #    return '-'.join([str(lunchs) for lunchs in self.lunchs.all()])
 
 class Order(models.Model):
     lunch = models.ForeignKey(Lunch, on_delete=models.CASCADE)

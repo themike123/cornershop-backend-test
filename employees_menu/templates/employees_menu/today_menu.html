@@ -20,7 +20,7 @@
                     <div class="card mb-3">
                       <div class="row g-0">
                         <div class="col-md-4">
-                          <img src="{% lunch.photo.url %}" class="img-fluid rounded-start" alt="MENU">
+                          <img src="{{ lunch.photo.url }}" class="img-fluid rounded-start" alt="MENU">
                         </div>
                         <div class="col-md-8">
                           <div class="card-body">
@@ -32,89 +32,7 @@
                       </div>
                     </div>
                   {% endfor %}
-                {% endif %}
-
-                
-                
-
-                <!--This is will delete-->
-                <div class="card mb-3">
-                    <div class="row g-0">
-                      <div class="col-md-4">
-                        <img src="{% static 'employees_menu/images/corn-pie.jpeg' %}" class="img-fluid rounded-start" alt="MENU">
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                          <h5 class="card-title">Corn pie, Salad and Dessert</h5>
-                          <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>                          
-                          <a href="" class="btn btn-dark">Order Now</a>
-                          <a href="#" class="btn btn-dark">Order Now</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="card mb-3">
-                    <div class="row g-0">
-                      <div class="col-md-4">
-                        <img src="{% static 'employees_menu/images/chicken-nugget-rice.jpeg' %}" class="img-fluid rounded-start" alt="MENU">
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                          <h5 class="card-title">Chicken Nugget Rice, Salad and Dessert</h5>
-                          <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                          <div class="mb-2">
-                            <label for="exampleFormControlTextarea1" class="form-label"><strong>order comments</strong></label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
-                        </div>
-                                         
-                        <button type="button" class="btn btn-dark">Order Now</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="card mb-3">
-                    <div class="row g-0">
-                      <div class="col-md-4">
-                        <img src="{% static 'employees_menu/images/rice-hamburger.jpeg' %}" class="img-fluid rounded-start" alt="MENU">
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                          <h5 class="card-title">Rice with hamburger, Salad and Dessert</h5>
-                          <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                          <div class="mb-2">
-                            <label for="exampleFormControlTextarea1" class="form-label"><strong>order comments</strong></label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
-                        </div>
-                                         
-                        <button type="button" class="btn btn-dark">Order Now</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="card mb-3">
-                    <div class="row g-0">
-                      <div class="col-md-4">
-                        <img src="{% static 'employees_menu/images/chicken.jpeg' %}" class="img-fluid rounded-start" alt="MENU">
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                          <h5 class="card-title">Premium chicken Salad and Dessert.</h5>
-                          <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                          <div class="mb-2">
-                            <label for="exampleFormControlTextarea1" class="form-label"><strong>order comments</strong></label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
-                        </div>
-                                         
-                        <button type="button" class="btn btn-dark">Order Now</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!--This is will delete-->
-
+                {% endif %}                                            
 
 
             </div>

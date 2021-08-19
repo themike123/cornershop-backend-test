@@ -4,18 +4,18 @@ from .forms import OrderForm, MenuForm, LuchForm
 from .tasks import send_reminder
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.contrib import messages
+
 
 def today_menu(request, menu=None):
 	context = {}
-
-	try:
-		context['menu'] = Menu.objects.get(uuid=menu).lunchs.all()		
 	
-		return render(request, 'employees_menu/today_menu.html', context)
-
+	try:
+		context['menu'] = Menu.objects.get(uuid=menu).lunchs.all()
 	except Menu.DoesNotExist:
-		return HttpResponse("Menu matching query does not exist")
+		context['menu'] = None
 
+	return render(request, 'employees_menu/today_menu.html', context)
 
 def new_order(request, lunch=None):
 	
@@ -53,32 +53,33 @@ def menu_index(request):
 		form = MenuForm(request.POST)
 
 		if form.is_valid():
-			new_menu = form.save()			
-			#send_reminder(request.build_absolute_uri('/menu/') + str(new_menu.uuid) + "/")
+			menu = Menu.objects.filter(date=form['date'].value())
+			if menu:
+				messages.add_message(request, messages.ERROR, 'Menu already exist for this date')
+			else:
+				new_menu = form.save()
+				messages.add_message(request, messages.SUCCESS, 'Luch was saved')				
+				send_reminder(request.build_absolute_uri('/menu/') + str(new_menu.uuid) + "/")			
 	else:
 		form = MenuForm()
 
 	context['menus'] = Menu.objects.all()
+	print( Menu.objects.all() )
 	context['form'] = form
 
 	return render(request, 'employees_menu/menus/index.html', context)
 
 
-def menu_edit(request, menu=None):
-	pass
-
 def lunch_index(request):
 	context = {}
-
+	
 	if request.method == 'POST':
 
 		form = LuchForm(request.POST, request.FILES)
 
-		if form.is_valid():			
+		if form.is_valid():
 			form.save()
-		else:			
-			print("Error al guardar")
-			print(form.errors)			
+			messages.add_message(request, messages.SUCCESS, 'Luch was saved')
 	else:
 		form = LuchForm()
 
@@ -86,3 +87,10 @@ def lunch_index(request):
 	context['form'] = form
 
 	return render(request, 'employees_menu/lunchs/index.html', context)
+
+def order_index(request):
+	context = {}
+
+	context['orders'] = Order.objects.all()
+
+	return render(request, 'employees_menu/order/index.html', context)
